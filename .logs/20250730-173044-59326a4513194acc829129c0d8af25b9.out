@@ -1,3 +1,0 @@
-components/barcode-scanner.tsx(25,14): error TS7016: Could not find a declaration file for module 'quagga'. '/opt/hostedapp/node/root/app/node_modules/quagga/lib/quagga.js' implicitly has an 'any' type.
-  Try `npm i --save-dev @types/quagga` if it exists or add a new declaration (.d.ts) file containing `declare module 'quagga';`
-exit_code=2

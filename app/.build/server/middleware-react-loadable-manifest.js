@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST='{"components/barcode-scanner.tsx -> quagga":{"id":4832,"files":["static/chunks/832.137c879c08c83a58.js"]}}';

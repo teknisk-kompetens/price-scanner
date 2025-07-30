@@ -8,6 +8,7 @@ yarn-error.log*
 dist/
 build/
 .next/
+.build/
 out/
 
 # Environment variables
@@ -36,6 +37,7 @@ Thumbs.db
 # Logs
 logs
 *.log
+.logs/
 
 # Runtime data
 pids
@@ -53,3 +55,10 @@ workbox-*.js
 
 # PWA related
 manifest.json.backup
+
+# Build artifacts
+*.tsbuildinfo
+.deploy/
+
+# Yarn
+.yarn/install-state.gz
