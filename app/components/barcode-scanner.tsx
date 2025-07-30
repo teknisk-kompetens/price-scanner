@@ -20,10 +20,16 @@ export function BarcodeScanner({ onScan, isActive, onToggle }: BarcodeScannerPro
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isQuaggaReady, setIsQuaggaReady] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Hydration fix - mark as client-side after mount
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Load Quagga dynamically
   useEffect(() => {
-    if (typeof window !== 'undefined' && !isQuaggaLoaded) {
+    if (isClient && typeof window !== 'undefined' && !isQuaggaLoaded) {
       import('quagga').then((module) => {
         Quagga = module.default || module;
         isQuaggaLoaded = true;
@@ -32,10 +38,10 @@ export function BarcodeScanner({ onScan, isActive, onToggle }: BarcodeScannerPro
         console.error('Failed to load Quagga:', err);
         setError('Kunde inte ladda scanner-biblioteket.');
       });
-    } else if (isQuaggaLoaded) {
+    } else if (isClient && isQuaggaLoaded) {
       setIsQuaggaReady(true);
     }
-  }, []);
+  }, [isClient]);
 
   // Handle scanner activation/deactivation
   useEffect(() => {
@@ -217,7 +223,8 @@ export function BarcodeScanner({ onScan, isActive, onToggle }: BarcodeScannerPro
           ) : (
             <>
               <Camera className="w-5 h-5 mr-2" />
-              {isQuaggaReady ? 'Starta Scanner' : 'Laddar scanner...'}
+              {/* Hydration fix: Always show same text initially */}
+              {!isClient ? 'Laddar scanner...' : isQuaggaReady ? 'Starta Scanner' : 'Laddar scanner...'}
             </>
           )}
         </Button>
