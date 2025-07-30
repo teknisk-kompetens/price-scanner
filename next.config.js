@@ -14,6 +14,13 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: { unoptimized: true },
+  trailingSlash: true,
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
+  },
+  async generateStaticParams() {
+    return [];
+  },
 };
 
 module.exports = nextConfig;
