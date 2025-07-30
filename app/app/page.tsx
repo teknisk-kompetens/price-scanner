@@ -5,11 +5,14 @@ import { useState, useCallback } from 'react';
 import { BarcodeScanner } from '@/components/barcode-scanner';
 import { PriceResults } from '@/components/price-results';
 import { ScanHistory } from '@/components/scan-history';
+import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
+import { PWAUpdatePrompt } from '@/components/pwa-update-prompt';
 import { getProductByISBN, getPricesByISBN, Product, PriceData } from '@/lib/mock-data';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Scan, Zap, TrendingDown } from 'lucide-react';
+import { Scan, Zap, TrendingDown, Wifi, WifiOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { usePWA } from '@/hooks/use-pwa';
 
 interface ScanHistoryItem {
   id: string;
@@ -26,6 +29,7 @@ export default function HomePage() {
   const [currentPrices, setCurrentPrices] = useState<PriceData[]>([]);
   const [scanHistory, setScanHistory] = useState<ScanHistoryItem[]>([]);
   const { toast } = useToast();
+  const { isOnline, isInstalled } = usePWA();
 
   const handleScan = useCallback((code: string) => {
     // Clean the scanned code
@@ -100,29 +104,59 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm border-b shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <Scan className="w-6 h-6 text-white" />
+    <>
+      {/* PWA Update Prompt */}
+      <PWAUpdatePrompt />
+      
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
+      
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+        {/* Sticky Header */}
+        <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b shadow-sm safe-area-top">
+          <div className="max-w-4xl mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <Scan className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-gray-900">Prisjämförelse Scanner</h1>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-gray-600">Scanna & jämför priser snabbt</p>
+                    {isInstalled && (
+                      <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                        Installerad
+                      </Badge>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">Prisjämförelse Scanner</h1>
-                <p className="text-sm text-gray-600">Scanna & jämför priser snabbt</p>
+              
+              <div className="flex items-center gap-2">
+                {/* Online/Offline Status */}
+                <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+                  isOnline 
+                    ? 'bg-green-50 text-green-700' 
+                    : 'bg-red-50 text-red-700'
+                }`}>
+                  {isOnline ? (
+                    <Wifi className="w-3 h-3" />
+                  ) : (
+                    <WifiOff className="w-3 h-3" />
+                  )}
+                  <span>{isOnline ? 'Online' : 'Offline'}</span>
+                </div>
+                
+                {scanHistory.length > 0 && (
+                  <Badge variant="outline" className="bg-purple-50">
+                    {scanHistory.length} scannade
+                  </Badge>
+                )}
               </div>
             </div>
-            
-            {scanHistory.length > 0 && (
-              <Badge variant="outline" className="bg-purple-50">
-                {scanHistory.length} scannade
-              </Badge>
-            )}
           </div>
-        </div>
-      </header>
+        </header>
 
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
         {/* Welcome/Info Card */}
@@ -183,6 +217,7 @@ export default function HomePage() {
           onRescanProduct={handleRescanProduct}
         />
       </main>
-    </div>
+      </div>
+    </>
   );
 }
