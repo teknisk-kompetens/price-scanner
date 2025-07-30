@@ -1,0 +1,24 @@
+Failed to compile.
+
+./app/offline/page.tsx
+Error: 
+  [31mx[0m You are attempting to export "metadata" from a component marked with "use client", which is disallowed. Either remove the export, or the "use client" directive. Read more: https://nextjs.org/
+  [31m|[0m docs/getting-started/react-essentials#the-use-client-directive
+  [31m|[0m 
+  [31m|[0m 
+    ,-[[36;1;4m/home/ubuntu/price_scanner/app/app/offline/page.tsx[0m:49:1]
+ [2m49[0m |   );
+ [2m50[0m | }
+ [2m51[0m | 
+ [2m52[0m | export const metadata = {
+    : [31;1m             ^^^^^^^^[0m
+ [2m53[0m |   title: 'Offline - Prisjämförelse Scanner',
+ [2m54[0m |   description: 'Offline-sida för Prisjämförelse Scanner',
+ [2m55[0m | };
+    `----
+
+Import trace for requested module:
+./app/offline/page.tsx
+
+
+> Build failed because of webpack errors

@@ -1,0 +1,23 @@
+  ▲ Next.js 14.2.28
+  - Local:        http://localhost:3000
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+ ✓ Starting...
+ ✓ Ready in 1434ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1688ms (521 modules)
+ GET /api/auth/csrf 404 in 2146ms
+ ○ Compiling / ...
+ ✓ Compiled / in 990ms (617 modules)
+ GET / 200 in 760ms
+ ✓ Compiled /offline in 389ms (667 modules)
+ GET / 200 in 533ms
+ GET /offline 200 in 537ms
+ GET / 200 in 24ms
+ GET / 200 in 25ms
+ GET / 200 in 32ms
+ ○ Compiling /test ...
+ ✓ Compiled /test in 584ms (685 modules)
+ GET /test 200 in 669ms
+[?25h
