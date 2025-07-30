@@ -1,8 +1,62 @@
+# Dependencies
 **/node_modules
-.next
-.cache
-.build
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production builds
+dist/
+build/
+.next/
+.build/
+out/
+target
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 *.nfs*
+
+# Logs
+logs
+*.log
+.logs/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Build artifacts
+*.tsbuildinfo
+.deploy/
+
+# Yarn
 **/.yarn/
 !**/.yarn/patches
 !**/.yarn/plugins
@@ -12,12 +66,7 @@
 !**/.yarn/cache
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
-dist
-target
-out
-.deploy
-.logs
-*.tsbuildinfo
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.yarn/install-state.gz
+
+# Cache
+.cache
