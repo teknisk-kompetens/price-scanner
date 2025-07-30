@@ -108,6 +108,14 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  display: block !important;
+}
+
+/* Ensure Quagga video container takes full space */
+#interactive.viewport {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
 }
 
 /* Scanner laser line animation */

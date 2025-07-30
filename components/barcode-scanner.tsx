@@ -240,7 +240,7 @@ export function BarcodeScanner({ onScan, isActive, onToggle }: BarcodeScannerPro
         <div className="relative bg-black rounded-lg overflow-hidden">
           <div 
             ref={scannerRef} 
-            className="w-full h-64 flex items-center justify-center"
+            className="w-full aspect-[4/3] min-h-[400px] max-h-[600px] flex items-center justify-center"
           >
             {isLoading && (
               <div className="text-white text-center">
